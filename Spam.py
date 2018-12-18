@@ -1,6 +1,42 @@
+'''
+# All the codes and data refer to the other github repository
+# This code is only used for education and not for other application -- not for other purpose
+# Referece:
+1. https://github.com/MoAbd/Spam-detection/blob/master/Spam%20detection.ipynb
+2. https://cloud.tencent.com/developer/news/217727
+# Naiev Bayes technique
+# For spam classification
+# Ref:
+# Naiev Bayesian: https://towardsdatascience.com/spam-classifier-in-python-from-scratch-27a98ddd8e73
+                + https://github.com/agarwalgaurav811/Spam-classifier
+# CNN + HAN + RNN:
+            + https://medium.com/jatana/report-on-text-classification-using-cnn-rnn-han-f0e887214d5f
+            + https://github.com/jatana-research/Text-Classification (this is im)
+            + https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/
+            + https://medium.com/emergent-future/spam-detection-using-neural-networks-in-python-9b2b2a062272
+# CNN for text classification: http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
+# CNN: https://github.com/dennybritz/cnn-text-classification-tf + http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
+
+# Comprehensive guide: https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/
+# Machine learning based method:
+# Feature selection:
+# SVM: Implement by myself
+# Why CNN
+# Translation system from scratch: https://machinelearningmastery.com/develop-neural-machine-translation-system-keras/
+
+# Goal: Spam detection with different classifiers
+# Title: Comparison of different classifiers on spam identification
+# Data set: This is a good idea
+# Result 1: Testing and training accuracy (accuracy and epoches)
+# Result 2: ROC? Maybe
+# Result 3: Final accuracy
+# Before and after TF-IDF operation
+'''
+
 # Spam detection
 import pandas as pd
 import re
+from keras.models import Sequential
 from keras.preprocessing import sequence, text
 from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
@@ -162,26 +198,26 @@ class SPAM:
 
         return data_use, data_unpad, y_train_vec, y_test_vec, num_words
 
-    def Data_2(self):
-
-        # Load the data
-        x_train = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/trainX.csv", delimiter=",")
-        y_train = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/trainY.csv", delimiter=",")
-        x_test = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/testX.csv", delimiter=",")
-        y_test = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/testY.csv", delimiter=",")
-
-        # Convert the Cate data to the label type
-        y_train_vec = CateDecode(y_train)
-        y_test_vec = CateDecode(y_test)
-
-        # self.MAX_WORDS_IN_SEQ = x_train.shape[1]
-        # print(self.MAX_WORDS_IN_SEQ)
-        data_train = sequence.pad_sequences(x_train, maxlen = self.MAX_WORDS_IN_SEQ, padding='post', truncating='post')
-        data_test = sequence.pad_sequences(x_test, maxlen = self.MAX_WORDS_IN_SEQ, padding='post', truncating='post')
-
-        num_words = x_train.shape[0]
-
-        return x_train, y_train, x_test, y_test, y_train_vec, y_test_vec, num_words
+    # def Data_2(self):
+    #
+    #     # Load the data
+    #     x_train = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/trainX.csv", delimiter=",")
+    #     y_train = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/trainY.csv", delimiter=",")
+    #     x_test = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/testX.csv", delimiter=",")
+    #     y_test = csv_to_numpy_array("/home/mgs/PycharmProjects/NLP_Final/Spam-detection-ANN/data/testY.csv", delimiter=",")
+    #
+    #     # Convert the Cate data to the label type
+    #     y_train_vec = CateDecode(y_train)
+    #     y_test_vec = CateDecode(y_test)
+    #
+    #     # self.MAX_WORDS_IN_SEQ = x_train.shape[1]
+    #     # print(self.MAX_WORDS_IN_SEQ)
+    #     data_train = sequence.pad_sequences(x_train, maxlen = self.MAX_WORDS_IN_SEQ, padding='post', truncating='post')
+    #     data_test = sequence.pad_sequences(x_test, maxlen = self.MAX_WORDS_IN_SEQ, padding='post', truncating='post')
+    #
+    #     num_words = x_train.shape[0]
+    #
+    #     return x_train, y_train, x_test, y_test, y_train_vec, y_test_vec, num_words
 
     def Data_3(self, flag_deep = 0):
 
@@ -279,7 +315,7 @@ class SPAM:
     def Test_2(self):
 
         # Data 0 -- Randomize the data
-        data_use, data_unpad, y_train_vec, y_test_vec, num_words = self.Data_0(flag_deep = 1)
+        # data_use, data_unpad, y_train_vec, y_test_vec, num_words = self.Data_0(flag_deep = 1)
 
         # Data 1
         # data_use, data_unpad, y_train_vec, y_test_vec, num_words = self.Data_1(flag_deep=1)
@@ -288,7 +324,7 @@ class SPAM:
         # x_train, y_train, x_test, y_test, y_train_vec, y_test_vec, num_words = self.Data_2()
 
         # Data 3
-        # data_use, data_unpad, y_train_vec, y_test_vec, num_words = self.Data_3(flag_deep = 1)
+        data_use, data_unpad, y_train_vec, y_test_vec, num_words = self.Data_3(flag_deep = 1)
 
         # Define the data
         x_train = data_use[0]
@@ -301,14 +337,72 @@ class SPAM:
         # y_train = data_unpad[2]
         # y_test = data_unpad[3]
 
+        # ANN keras
+        self.ANN_keras(x_train, y_train, x_test, y_test)
+
         # ANN
-        self.ANN(x_train, y_train, x_test, y_test)
+        # self.ANN(x_train, y_train, x_test, y_test)
 
         # CNN
         # self.CNN(x_train, y_train, x_test, y_test, num_words)
 
         # RNN-LSTM
         # self.RNN(x_train, y_train, x_test, y_test, num_words)
+
+    def ANN_keras(self, x_train, y_train, x_test, y_test):
+
+        # ANN implementation with Keras
+        # Design the model -- model the problem
+        num_hidden_nodes1 = 32
+        num_hidden_nodes2 = 16
+        num_hidden_nodes3 = 8
+
+        keep_prob = 0.5
+        num_features = x_train.shape[1]
+        # print(num_features)
+
+        # create model
+        model = Sequential()
+        model.add(Dense(num_hidden_nodes1, input_dim=num_features, activation='relu'))
+        model.add(Dense(num_hidden_nodes2, activation='relu'))
+        model.add(Dense(num_hidden_nodes3, activation='relu'))
+        model.add(Dense(2, activation='sigmoid'))
+
+        # Compile model
+        model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+        # Fit the model
+        history = model.fit(x_train, y_train, epochs=200, batch_size=256, validation_data=[x_test, y_test])
+
+        # evaluate the model
+        scores = model.evaluate(x_test, y_test)
+        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
+
+        # Prediction
+        predictions = model.predict(x_test)
+        rounded = [round(x[0]) for x in predictions]
+        print(rounded)
+
+        # Show the figure
+        fig1 = plt.figure()
+        plt.plot(history.history['loss'], 'r', linewidth=3.0)
+        plt.plot(history.history['val_loss'], 'b', linewidth=3.0)
+        plt.legend(['Training loss', 'Validation Loss'], fontsize=18)
+        plt.xlabel('Epochs ', fontsize=16)
+        plt.ylabel('Loss', fontsize=16)
+        plt.title('Loss Curves :CNN', fontsize=16)
+        fig1.savefig('loss_cnn.png')
+        plt.show()
+
+        fig2 = plt.figure()
+        plt.plot(history.history['acc'], 'r', linewidth=3.0)
+        plt.plot(history.history['val_acc'], 'b', linewidth=3.0)
+        plt.legend(['Training Accuracy', 'Validation Accuracy'], fontsize=18)
+        plt.xlabel('Epochs ', fontsize=16)
+        plt.ylabel('Accuracy', fontsize=16)
+        plt.title('Accuracy Curves : CNN', fontsize=16)
+        fig2.savefig('accuracy_cnn.png')
+        plt.show()
 
     def ANN(self, trainX, trainY, testX, testY):
 
